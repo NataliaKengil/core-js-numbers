@@ -182,7 +182,7 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 3  => 2000
  */
 function roundToPowerOfTen(num, pow) {
-  const multiplier = Math.pow(10, pow);
+  const multiplier = 10 ** pow;
   return Math.round(num / multiplier) * multiplier;
 }
 
@@ -230,7 +230,7 @@ function isPrime(n) {
  */
 function toNumber(value, def) {
   const number = Number(value);
-  return isNaN(number) ? def : number;
+  return Number.isNaN(number) ? def : number;
 }
 
 /**
@@ -267,7 +267,7 @@ function getFibonacciNumber(index) {
   }
   let a = 0;
   let b = 1;
-  for (let i = 2; i <= index; i++) {
+  for (let i = 2; i <= index; i += 1) {
     [a, b] = [b, a + b];
   }
   return b;
@@ -301,12 +301,12 @@ function getSumToN(n) {
  */
 function getSumOfDigits(num) {
   let sum = 0;
-  num = Math.abs(num); 
-  while (num > 0) {
-    sum += num % 10; 
-    num = Math.floor(num / 10); 
+  let absNum = Math.abs(num);
+  while (absNum > 0) {
+    sum += absNum % 10;
+    absNum = Math.floor(absNum / 10);
   }
-  return sum; ;
+  return sum;
 }
 
 /**
@@ -321,7 +321,14 @@ function getSumOfDigits(num) {
  *   15  => false
  */
 function isPowerOfTwo(num) {
-  return num > 0 && (num & (num - 1)) === 0;
+  if (num <= 0) return false; 
+  let current = num; 
+
+  while (current > 1) {
+    if (current % 2 !== 0) return false; 
+    current /= 2; 
+  }
+  return true; 
 }
 
 /**
@@ -457,8 +464,8 @@ function isInteger(number) {
  * 'abcdefgh'      => NaN
  */
 function getFloatOnString(str) {
-  const result = parseFloat(str); 
-  return isNaN(result) ? NaN : result;
+  const result = parseFloat(str);
+  return Number.isNaN(result) ? NaN : result;
 }
 
 /**
@@ -476,8 +483,8 @@ function getFloatOnString(str) {
  * '10', 8              => 8
  */
 function getIntegerOnString(str, base) {
-  const result = parseInt(str, base); 
-  return isNaN(result) ? NaN : result;
+  const result = parseInt(str, base);
+  return Number.isNaN(result) ? NaN : result;
 }
 
 /**
@@ -598,9 +605,9 @@ function getMaxNumber(firstNumber, secondNumber) {
  * -1, 1 => -1 | 0 | 1
  */
 function getRandomInteger(min, max) {
-  min = Math.min(min, max);
-  max = Math.max(min, max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;;
+  const minValue = Math.min(min, max);
+  const maxValue = Math.max(min, max);
+  return Math.floor(Math.random() * (maxValue - minValue + 1)) + min;
 }
 
 /**
