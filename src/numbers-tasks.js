@@ -50,7 +50,13 @@ function getCircleCircumference(radius) {
  *  -3, 3  => 0
  */
 function getAverage(value1, value2) {
-  return (value1 + value2) / 2;
+  const num1 = Number(value1);
+  const num2 = Number(value2);
+  if (Number.isNaN(num1) || Number.isNaN(num2)) {
+    return null;
+  }
+  const average = num1 / 2 + num2 / 2;
+  return average;
 }
 
 /**
@@ -321,14 +327,14 @@ function getSumOfDigits(num) {
  *   15  => false
  */
 function isPowerOfTwo(num) {
-  if (num <= 0) return false; 
-  let current = num; 
+  if (num <= 0) return false;
+  let current = num;
 
   while (current > 1) {
-    if (current % 2 !== 0) return false; 
-    current /= 2; 
+    if (current % 2 !== 0) return false;
+    current /= 2;
   }
-  return true; 
+  return true;
 }
 
 /**
@@ -464,8 +470,8 @@ function isInteger(number) {
  * 'abcdefgh'      => NaN
  */
 function getFloatOnString(str) {
-  const result = parseFloat(str);
-  return Number.isNaN(result) ? NaN : result;
+  const num = parseFloat(str);
+  return Number.isNaN(num) ? NaN : num;
 }
 
 /**
@@ -483,8 +489,8 @@ function getFloatOnString(str) {
  * '10', 8              => 8
  */
 function getIntegerOnString(str, base) {
-  const result = parseInt(str, base);
-  return Number.isNaN(result) ? NaN : result;
+  const parsed = Number.parseInt(str, base);
+  return Number.isNaN(parsed) ? NaN : parsed;
 }
 
 /**
@@ -573,7 +579,14 @@ function getIntegerPartNumber(number) {
  * 0.1, 0.2, 0.3 => 0.6
  */
 function getSumOfNumbers(x1, x2, x3) {
-  return x1 + x2 + x3;
+  const num1 = Number(x1);
+  const num2 = Number(x2);
+  const num3 = Number(x3);
+  if (Number.isNaN(num1) || Number.isNaN(num2) || Number.isNaN(num3)) {
+    return null;
+  }
+  const sum = num1 + num2 + num3;
+  return Math.round(sum * 1e10) / 1e10;
 }
 
 /**
@@ -621,7 +634,7 @@ function getRandomInteger(min, max) {
  * 3, 4 => 5
  */
 function getHypotenuse(a, b) {
-  return Math.sqrt(a * a + b * b);
+  return Math.hypot(a, b);
 }
 
 /**
@@ -638,6 +651,9 @@ function getHypotenuse(a, b) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
+  if (typeof number !== 'number' || number < 0 || !Number.isInteger(number)) {
+    return 0;
+  }
   return Math.floor((number + 1) / 2);
 }
 
